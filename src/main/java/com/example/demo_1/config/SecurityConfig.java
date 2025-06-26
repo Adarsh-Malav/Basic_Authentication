@@ -1,4 +1,4 @@
-package com.example.demo_1.config;
+	package com.example.demo_1.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,12 +23,20 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-        	.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authz -> authz
-                .anyRequest().authenticated())
-            .httpBasic(withDefaults());
-        return http.build();
+//        http
+//        	.csrf(AbstractHttpConfigurer::disable)
+//            .authorizeHttpRequests(authz -> authz
+//                .anyRequest().authenticated())
+//            .httpBasic(withDefaults());
+//        return http.build();
+    	// for basic authentication
+    	
+    	 http
+     	.csrf(AbstractHttpConfigurer::disable)
+         .authorizeHttpRequests(authz -> authz.requestMatchers("/authenticate").permitAll()
+             .anyRequest().authenticated())
+         .httpBasic(withDefaults());
+     return http.build();
     }
     @Bean
     public UserDetailsService userDetailsService(){
