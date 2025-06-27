@@ -24,23 +24,23 @@ public class JWTUtil {
                 .compact();
     }
 
-//    public String extractUsername(String token){
-//        return extractClaims(token).getSubject();
-//    }
+    public String extractUsername(String token){
+        return extractClaims(token).getSubject();
+    }
 
-//    private Claims extractClaims(String token) {
-//        return Jwts.parserBuilder()
-//                .setSigningKey(key)
-//                .build()
-//                .parseClaimsJws(token)
-//                .getBody();
-//    }
+    private Claims extractClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
 
-//    public boolean validateToken(String username, UserDetails userDetails,String token) {
-//       return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
-//    }
+    public boolean validateToken(String username, UserDetails userDetails,String token) {
+       return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+    }
 
-//    private boolean isTokenExpired(String token) {
-//        return extractClaims(token).getExpiration().before(new Date());
-//    }
+    private boolean isTokenExpired(String token) {
+        return extractClaims(token).getExpiration().before(new Date());
+    }
 }
